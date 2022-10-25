@@ -133,6 +133,7 @@ def webui():
 
         app, local_url, share_url = demo.launch(
             share=cmd_opts.share,
+            favicon_path="favicon.ico",
             server_name="0.0.0.0" if cmd_opts.listen else None,
             server_port=cmd_opts.port,
             debug=cmd_opts.gradio_debug,
