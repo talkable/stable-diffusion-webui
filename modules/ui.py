@@ -1189,7 +1189,7 @@ def create_ui():
                         process_focal_crop_entropy_weight = gr.Slider(label='Focal point entropy weight', value=0.15, minimum=0.0, maximum=1.0, step=0.05, elem_id="train_process_focal_crop_entropy_weight")
                         process_focal_crop_edges_weight = gr.Slider(label='Focal point edges weight', value=0.5, minimum=0.0, maximum=1.0, step=0.05, elem_id="train_process_focal_crop_edges_weight")
                         process_focal_crop_debug = gr.Checkbox(label='Create debug image', elem_id="train_process_focal_crop_debug")
-                    
+
                     with gr.Column(visible=False) as process_multicrop_col:
                         gr.Markdown('Each image is center-cropped with an automatically chosen width and height.')
                         with gr.Row():
@@ -1201,7 +1201,7 @@ def create_ui():
                         with gr.Row():
                             process_multicrop_objective = gr.Radio(["Maximize area", "Minimize error"], value="Maximize area", label="Resizing objective", elem_id="train_process_multicrop_objective")
                             process_multicrop_threshold = gr.Slider(minimum=0, maximum=1, step=0.01, label="Error threshold", value=0.1, elem_id="train_process_multicrop_threshold")
-   
+
                     with gr.Row():
                         with gr.Column(scale=3):
                             gr.HTML(value="")
@@ -1244,7 +1244,7 @@ def create_ui():
                     with FormRow():
                         embedding_learn_rate = gr.Textbox(label='Embedding Learning rate', placeholder="Embedding Learning rate", value="0.005", elem_id="train_embedding_learn_rate")
                         hypernetwork_learn_rate = gr.Textbox(label='Hypernetwork Learning rate', placeholder="Hypernetwork Learning rate", value="0.00001", elem_id="train_hypernetwork_learn_rate")
-                    
+
                     with FormRow():
                         clip_grad_mode = gr.Dropdown(value="disabled", label="Gradient Clipping", choices=["disabled", "value", "norm"])
                         clip_grad_value = gr.Textbox(placeholder="Gradient clip value", value="0.1", show_label=False)
@@ -1578,7 +1578,7 @@ def create_ui():
                 gr.HTML(shared.html("licenses.html"), elem_id="licenses")
 
             gr.Button(value="Show all pages", elem_id="settings_show_all_pages")
-            
+
 
         def unload_sd_weights():
             modules.sd_models.unload_model_weights()
@@ -1652,7 +1652,9 @@ def create_ui():
     for _interface, label, _ifid in interfaces:
         shared.tab_names.append(label)
 
-    with gr.Blocks(theme=shared.gradio_theme, analytics_enabled=False, title="Stable Diffusion") as demo:
+    with gr.Blocks(theme=shared.gradio_theme, analytics_enabled=False, title="Talkable Art Box") as demo:
+        with gr.Row(elem_id="talkable_header"):
+            gr.HTML(value="<img src=\"https://curebit-staging.s3.amazonaws.com/talkable-art-terminal-light-logo.png\" style=\"height: 32px\" class=\"mb-4 px-2\">")
         with gr.Row(elem_id="quicksettings", variant="compact"):
             for i, k, item in sorted(quicksettings_list, key=lambda x: quicksettings_names.get(x[1], x[0])):
                 component = create_setting_component(k, is_quicksettings=True)
@@ -1879,6 +1881,9 @@ def javascript_html():
         head += f'<script type="module" src="{webpath(script.path)}"></script>\n'
 
     head += f'<script type="text/javascript">{inline}</script>\n'
+    with open('/etc/hostname', 'r') as file:
+        hostname = file.read().strip()
+        head += f"<script>window.TkblBoxName = '{hostname}'</script>\n"
 
     return head
 

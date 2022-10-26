@@ -320,6 +320,8 @@ def webui():
             ssl_keyfile=cmd_opts.tls_keyfile,
             ssl_certfile=cmd_opts.tls_certfile,
             ssl_verify=cmd_opts.disable_tls_verify,
+            description="Talkable Art Terminal",
+            favicon_path="favicon.ico",
             debug=cmd_opts.gradio_debug,
             auth=[tuple(cred.split(':')) for cred in gradio_auth_creds] if gradio_auth_creds else None,
             inbrowser=cmd_opts.autolaunch,
