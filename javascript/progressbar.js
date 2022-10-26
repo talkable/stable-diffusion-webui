@@ -46,10 +46,12 @@ function formatTime(secs){
 }
 
 function setTitle(progress){
-    var title = 'Stable Diffusion'
+    var title = 'Talkable Art Terminal, powered by Stable Diffusion'
 
     if(opts.show_progress_in_title && progress){
-        title = '[' + progress.trim() + '] ' + title;
+        title = window.TkblBoxName + ': [' + progress.trim() + '] ' + title;
+    } else{
+        title = window.TkblBoxName + ': ' + title;
     }
 
     if(document.title != title){
