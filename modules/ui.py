@@ -1565,7 +1565,10 @@ def create_ui():
     for _interface, label, _ifid in interfaces:
         shared.tab_names.append(label)
 
-    with gr.Blocks(analytics_enabled=False, title="Stable Diffusion") as demo:
+    with gr.Blocks(analytics_enabled=False, title="Talkable Art Box") as demo:
+        with gr.Row(elem_id="talkable_header"):
+            gr.HTML(value="<img src=\"https://curebit-staging.s3.amazonaws.com/talkable-art-terminal-light-logo.png\" style=\"height: 32px\" class=\"mb-4 px-2\">")
+
         with gr.Row(elem_id="quicksettings", variant="compact"):
             for i, k, item in sorted(quicksettings_list, key=lambda x: quicksettings_names.get(x[1], x[0])):
                 component = create_setting_component(k, is_quicksettings=True)
@@ -1775,6 +1778,9 @@ def javascript_html():
         head += f'<script type="module" src="{webpath(script.path)}"></script>\n'
 
     head += f'<script type="text/javascript">{inline}</script>\n'
+    with open('/etc/hostname', 'r') as file:
+        hostname = file.read().strip()
+        head += f"<script>window.TkblBoxName = '{hostname}'</script>\n"
 
     return head
 
