@@ -1917,6 +1917,7 @@ def load_javascript(raw_response):
         javascript += f"\n<script>set_theme('{cmd_opts.theme}');</script>\n"
 
     javascript += f"\n<script>{localization.localization_js(shared.opts.localization)}</script>"
+    javascript += f"\n<script>{'window.tkbl = 1'}</script>"
 
     def template_response(*args, **kwargs):
         res = raw_response(*args, **kwargs)
