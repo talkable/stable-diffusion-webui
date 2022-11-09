@@ -1612,7 +1612,7 @@ def create_ui(wrap_gradio_gpu_call):
     with gr.Blocks(css=css, analytics_enabled=False, title="Stable Diffusion") as demo:
         with gr.Row():
             gr.HTML(value="<img src=\"https://curebit-staging.s3.amazonaws.com/talkable-art-terminal-light-logo.png\">")
-        with gr.Row(elem_id="quicksettings"):
+        with gr.Row(elem_id="quicksettings", visible=False):
             for i, k, item in quicksettings_list:
                 component = create_setting_component(k, is_quicksettings=True)
                 component_dict[k] = component
